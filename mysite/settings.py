@@ -1,3 +1,8 @@
+import os,environ
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
 """
 Django settings for mysite project.
 
@@ -15,12 +20,16 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# reading .env file
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pqm!*$z8dt=*t#!0=i$dmo866y&!#w2-4k_hv1cv22&(7-zm%y'
+SECRET_KEY=os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
